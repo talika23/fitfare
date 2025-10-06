@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}FitFare{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center bg-blue-600 text-white p-4 shadow-md">
+    <h1 class="text-2xl font-bold">FitFare Dashboard</h1>
+    <div>
+      <a href="{% url 'home' %}" class="mr-4 hover:text-gray-300 font-semibold">Home</a>
+
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="hover:text-gray-300 font-semibold">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="hover:text-gray-300 font-semibold">Login</a>
+        <a href="{% url 'register' %}" class="ml-2 hover:text-gray-300 font-semibold">Register</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="flex-1 p-6">
+    {% block content %}{% endblock %}
+  </main>
+
+</body>
+</html>
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}FitFare AI{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="bg-gray-800 p-4 flex justify-center space-x-6 shadow-lg">
+    <a href="{% url 'home' %}" class="hover:text-blue-400 font-semibold">Home</a>
+    <a href="{% url 'ai_fitness_chatbot' %}" class="hover:text-blue-400 font-semibold">AI Fitness Chatbot</a>
+    <a href="{% url 'ai_nutrition_planner' %}" class="hover:text-green-400 font-semibold">AI Nutrition Planner</a>
+    <a href="{% url 'analytics_dashboard' %}" class="hover:text-yellow-400 font-semibold">Analytics</a>
+    <a href="{% url 'accountability_dashboard' %}" class="hover:text-indigo-400 font-semibold">Accountability</a>
+    <a href="{% url 'dashboard' %}" class="hover:text-pink-400 font-semibold">Dashboard</a>
+    <a href="{% url 'logout' %}" class="hover:text-red-400 font-semibold">Logout</a>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="flex-1 p-6">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html> {% endcomment %}

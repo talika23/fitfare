@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<!-- Full Page Container with Background Image -->
+<div class="flex flex-col items-center justify-center space-y-6 min-h-screen"
+     style="background: url('{% static 'core/images/fitness.jpg' %}') no-repeat center center; background-size: cover;">
+
+    <!-- Welcome Card -->
+    <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-xl shadow-lg w-full max-w-lg text-center">
+        <h2 class="text-2xl font-bold mb-2">
+            Welcome, {{ user.username|default:user.email|default:"User" }}
+        </h2>
+        <p class="text-lg">Manage your workouts, nutrition, and track AI insights here.</p>
+    </div>
+
+    <!-- AI Features Card -->
+    <div class="bg-white bg-opacity-80 p-6 rounded-xl shadow-md w-full max-w-lg text-center">
+        <h3 class="text-xl font-semibold mb-4 text-gray-800">AI Features</h3>
+
+        <!-- AI Features Button (Center) -->
+        <div class="flex justify-center">
+            <button id="showAI" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition text-lg font-semibold">
+                Show AI Features
+            </button>
+        </div>
+
+        <!-- AI Features Grid (hidden by default) -->
+        <div id="aiFeatures" class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 hidden">
+            <a href="{% url 'ai_fitness_chatbot' %}" class="bg-gradient-to-r from-purple-400 to-pink-400 text-white p-4 rounded-lg shadow hover:scale-105 transform transition">
+                <h4 class="text-lg font-semibold mb-1">AI Fitness Chatbot</h4>
+                <p class="text-sm">Personalized fitness advice & workouts</p>
+            </a>
+            <a href="{% url 'ai_nutrition_planner' %}" class="bg-gradient-to-r from-green-400 to-teal-400 text-white p-4 rounded-lg shadow hover:scale-105 transform transition">
+                <h4 class="text-lg font-semibold mb-1">AI Nutrition Planner</h4>
+                <p class="text-sm">Track calories & plan meals</p>
+            </a>
+            <a href="{% url 'accountability_dashboard' %}" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white p-4 rounded-lg shadow hover:scale-105 transform transition">
+                <h4 class="text-lg font-semibold mb-1">Accountability Dashboard</h4>
+                <p class="text-sm">Stay accountable with partners</p>
+            </a>
+            <a href="{% url 'analytics_dashboard' %}" class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white p-4 rounded-lg shadow hover:scale-105 transform transition">
+                <h4 class="text-lg font-semibold mb-1">Analytics for Peak Hour</h4>
+                <p class="text-sm">Analyze peak performance</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Script to toggle AI Features -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('showAI');
+    const features = document.getElementById('aiFeatures');
+
+    btn.addEventListener('click', function() {
+        features.classList.toggle('hidden');
+    });
+
+    window.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !features.contains(e.target)) {
+            features.classList.add('hidden');
+        }
+    });
+});
+</script>
+
+{% else %}
+<p class="text-center text-gray-400 mt-6">Please login to access AI features and dashboard content.</p>
+{% endif %}
+{% endblock %}

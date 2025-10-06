@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FitFare AI</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+</head>
+<body>
+  <h1>FitFare AI Chat & Notifications</h1>
+
+  <div class="card">
+    <input id="message" placeholder="Type a message..." />
+    <button id="sendBtn">Send</button>
+    <p id="reply" class="reply"></p>
+  </div>
+
+  <div class="card">
+    <h3>Notifications</h3>
+    <div id="notifications" class="notifications"></div>
+  </div>
+
+  <script src="{% static 'core/js/app.js' %}"></script>
+</body>
+</html>

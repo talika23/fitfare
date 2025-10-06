@@ -1,0 +1,378 @@
+{% comment %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analytics Dashboard | FitFare</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1c92d2, #f2fcfe);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.analytics-container {
+  background: #fff;
+  padding: 1.5rem 2rem; 
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+  max-width: 700px; 
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  color: #1c92d2;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 1.7rem; 
+}
+
+.subtitle {
+  font-size: 0.9rem; 
+  color: #666;
+  margin-bottom: 20px; 
+}
+
+.chart-container {
+  margin-top: 20px; 
+}
+
+canvas {
+  max-width: 100%;
+  height: 180px; /* smaller chart height */
+}
+
+/* Loader Animation */
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1c92d2;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 15px auto;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  canvas {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  canvas {
+    height: 120px;
+  }
+  h1 {
+    font-size: 1.4rem;
+  }
+  .subtitle {
+    font-size: 0.8rem;
+  }
+  .analytics-container {
+    padding: 1rem 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="analytics-container">
+  <h1>🏋️ FitFare Analytics Dashboard</h1>
+  <p class="subtitle">Real-Time Peak Hour & Performance Analytics</p>
+
+  <div id="loader" class="loader"></div>
+
+  <div class="chart-container">
+    <h4>📊 Peak Hour Workout Intensity</h4>
+    <canvas id="workoutChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h4>🥗 Nutrition Performance (Weekly)</h4>
+    <canvas id="nutritionChart"></canvas>
+  </div>
+</div>
+
+<script>
+const workoutCtx = document.getElementById('workoutChart').getContext('2d');
+const nutritionCtx = document.getElementById('nutritionChart').getContext('2d');
+
+let workoutChart, nutritionChart;
+
+async function fetchDashboardData() {
+  document.getElementById('loader').style.display = 'block';
+  const response = await fetch('/api/dashboard-data/');
+  const data = await response.json();
+  document.getElementById('loader').style.display = 'none';
+  return data;
+}
+
+async function renderCharts() {
+  const data = await fetchDashboardData();
+
+  // Destroy previous charts if they exist
+  if (workoutChart) workoutChart.destroy();
+  if (nutritionChart) nutritionChart.destroy();
+
+  // Workout Chart
+  workoutChart = new Chart(workoutCtx, {
+    type: 'line',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Workouts per Day',
+        data: data.weekly_workouts,
+        borderColor: '#1c92d2',
+        backgroundColor: 'rgba(28,146,210,0.2)',
+        fill: true,
+        tension: 0.4,
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true, position: 'top' } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // Nutrition Chart
+  nutritionChart = new Chart(nutritionCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      datasets: [{
+        label: 'Nutrition Score',
+        data: data.weekly_nutrition,
+        backgroundColor: ['#4bc0c0', '#36a2eb', '#ffcd56', '#ff6384'],
+        borderRadius: 10
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, max: 100 } }
+    }
+  });
+}
+
+// Initial load
+renderCharts();
+
+// 🔄 Auto update every 5 seconds (real-time)
+setInterval(renderCharts, 5000);
+</script>
+
+</body>
+</html> {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analytics Dashboard | FitFare</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1c92d2, #f2fcfe);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.analytics-container {
+  background: #fff;
+  padding: 1rem 1.5rem; 
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+  max-width: 600px; /* narrower container */
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  color: #1c92d2;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 1.6rem; 
+}
+
+.subtitle {
+  font-size: 0.85rem; 
+  color: #666;
+  margin-bottom: 15px; 
+}
+
+.chart-container {
+  margin-top: 15px; 
+  padding: 10px;
+  border-radius: 12px;
+  background: #f7f9fb; /* subtle box background */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); 
+}
+
+/* Chart canvas */
+canvas {
+  max-width: 100%;
+  height: 150px; /* smaller chart height */
+}
+
+/* Loader Animation */
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1c92d2;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 15px auto;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  canvas {
+    height: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  canvas {
+    height: 100px;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  .subtitle {
+    font-size: 0.75rem;
+  }
+  .analytics-container {
+    padding: 0.8rem 1rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="analytics-container">
+  <h1>🏋️ FitFare Analytics Dashboard</h1>
+  <p class="subtitle">Real-Time Peak Hour & Performance Analytics</p>
+
+  <div id="loader" class="loader"></div>
+
+  <div class="chart-container">
+    <h4>📊 Peak Hour Workout Intensity</h4>
+    <canvas id="workoutChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h4>🥗 Nutrition Performance (Weekly)</h4>
+    <canvas id="nutritionChart"></canvas>
+  </div>
+</div>
+
+<script>
+const workoutCtx = document.getElementById('workoutChart').getContext('2d');
+const nutritionCtx = document.getElementById('nutritionChart').getContext('2d');
+
+let workoutChart, nutritionChart;
+
+async function fetchDashboardData() {
+  document.getElementById('loader').style.display = 'block';
+  const response = await fetch('/api/dashboard-data/');
+  const data = await response.json();
+  document.getElementById('loader').style.display = 'none';
+  return data;
+}
+
+async function renderCharts() {
+  const data = await fetchDashboardData();
+
+  if (workoutChart) workoutChart.destroy();
+  if (nutritionChart) nutritionChart.destroy();
+
+  workoutChart = new Chart(workoutCtx, {
+    type: 'line',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Workouts per Day',
+        data: data.weekly_workouts,
+        borderColor: '#1c92d2',
+        backgroundColor: 'rgba(28,146,210,0.2)',
+        fill: true,
+        tension: 0.4,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true, position: 'top' } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  nutritionChart = new Chart(nutritionCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      datasets: [{
+        label: 'Nutrition Score',
+        data: data.weekly_nutrition,
+        backgroundColor: ['#4bc0c0', '#36a2eb', '#ffcd56', '#ff6384'],
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, max: 100 } }
+    }
+  });
+}
+
+renderCharts();
+setInterval(renderCharts, 5000);
+</script>
+
+</body>
+</html>

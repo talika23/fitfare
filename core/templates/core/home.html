@@ -1,0 +1,381 @@
+{% comment %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FitFare - Smart Fitness Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Full-page background */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url("{% static 'core/images/fitness2.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+  }
+
+  /* Overlay for readability */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+  }
+
+  /* Container for content */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 80px 20px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    color: #f0f0f0;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #ff6f61;
+    color: #fff;
+    padding: 12px 30px;
+    margin: 5px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    background: #ff4c3b;
+  }
+
+  /* Features Section */
+  .features {
+    padding: 60px 20px;
+    margin-top: 40px;
+    color: #fff;
+  }
+
+  .features h2 {
+    color: #ffeb3b;
+    margin-bottom: 40px;
+  }
+
+  .feature-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  /* Equal size boxes with footer color */
+  .feature {
+    background: rgba(33,147,176,0.9); /* same as footer */
+    padding: 30px 20px;
+    border-radius: 15px;
+    flex: 1 1 22%; /* four boxes equally sized */
+    max-width: 22%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+    color: #fff;
+  }
+
+  .feature:hover {
+    transform: translateY(-8px);
+    background: rgba(33,147,176,1); /* slightly darker on hover */
+  }
+
+  .feature h3 {
+    color: #ffeb3b; /* highlighted heading */
+    margin-bottom: 15px;
+  }
+
+  .feature p {
+    font-size: 0.95rem;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(33,147,176,0.9);
+    color: #fff;
+    padding: 30px 20px;
+    margin-top: 40px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  @media(max-width:1024px){
+    .feature {
+      flex: 1 1 45%;
+      max-width: 45%;
+    }
+  }
+
+  @media(max-width:768px){
+    .feature-box {
+      flex-direction: column;
+      align-items: center;
+    }
+    .feature {
+      max-width: 90%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to FitFare</h1>
+    <p>Your smart fitness assistant — AI chatbot, personalized nutrition planner, analytics dashboard, and accountability partner dashboard to track your progress.</p>
+    <a href="{% url 'login' %}" class="btn">Login</a>
+    <a href="{% url 'register' %}" class="btn">Sign Up</a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2>Our Features</h2>
+    <div class="feature-box">
+      <div class="feature">
+        <h3>AI Fitness Chatbot</h3>
+        <p>Get real-time fitness guidance and tips directly from our intelligent AI assistant.</p>
+      </div>
+      <div class="feature">
+        <h3>Nutrition Planner</h3>
+        <p>Personalized meal plans based on your goals, preferences, and lifestyle.</p>
+      </div>
+      <div class="feature">
+        <h3>Analytics Dashboard</h3>
+        <p>Track your workouts, calories, and progress visually with simple charts.</p>
+      </div>
+      <div class="feature">
+        <h3>Accountability Partner Dashboard</h3>
+        <p>Connect with partners, track shared goals, and stay motivated together.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 FitFare. All Rights Reserved.
+</footer>
+
+</body>
+</html> {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FitFare - Smart Fitness Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Full-page background */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url("{% static 'core/images/fitness2.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+  }
+
+  /* Overlay for readability */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+  }
+
+  /* Container for content */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 80px 20px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    color: #f0f0f0;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #ff6f61;
+    color: #fff;
+    padding: 12px 30px;
+    margin: 5px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    background: #ff4c3b;
+  }
+
+  /* Features Section */
+  .features {
+    padding: 60px 20px;
+    margin-top: 40px;
+    color: #fff;
+  }
+
+  .features h2 {
+    color: #ffeb3b;
+    margin-bottom: 40px;
+  }
+
+  .feature-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: nowrap; /* all boxes in one row on desktop */
+  }
+
+  .feature {
+    background: rgba(49, 82, 90, 0.9); /* same color as footer */
+    padding: 30px 20px;
+    border-radius: 15px;
+    flex: 1;           /* equal width */
+    max-width: 22%;    /* ensures 4 fit in one row */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+    color: #fff;
+  }
+
+  .feature:hover {
+    transform: translateY(-8px);
+    background: rgba(33,147,176,1); /* slightly brighter on hover */
+  }
+
+  .feature h3 {
+    color: #c0766fff;
+    margin-bottom: 15px;
+  }
+
+  .feature p {
+    font-size: 0.95rem;
+    color: #fff;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(68, 158, 181, 0.9);
+    color: #fff;
+    padding: 30px 20px;
+    margin-top: 40px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width:1200px){
+    .feature { max-width: 23%; }
+  }
+
+  @media(max-width:1024px){
+    .feature { max-width: 45%; } /* 2 per row on tablets */
+  }
+
+  @media(max-width:768px){
+    .feature-box {
+      flex-direction: column;
+      align-items: center;
+    }
+    .feature { max-width: 90%; margin-bottom: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to FitFare</h1>
+    <p>Your smart fitness assistant — AI chatbot, personalized nutrition planner, analytics dashboard, and accountability partner dashboard to track your progress.</p>
+    <a href="{% url 'login' %}" class="btn">Login</a>
+    <a href="{% url 'register' %}" class="btn">Sign Up</a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2>Our Features</h2>
+    <div class="feature-box">
+      <div class="feature">
+        <h3>AI Fitness Chatbot</h3>
+        <p>Get real-time fitness guidance and tips directly from our intelligent AI assistant.</p>
+      </div>
+      <div class="feature">
+        <h3>Nutrition Planner</h3>
+        <p>Personalized meal plans based on your goals, preferences, and lifestyle.</p>
+      </div>
+      <div class="feature">
+        <h3>Analytics Dashboard</h3>
+        <p>Track your workouts, calories, and progress visually with simple charts.</p>
+      </div>
+      <div class="feature">
+        <h3>Accountability Partner Dashboard</h3>
+        <p>Connect with partners, track shared goals, and stay motivated together.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 FitFare. All Rights Reserved.
+</footer>
+
+</body>
+</html>
